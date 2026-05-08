@@ -66,7 +66,8 @@ jobs:
             DEVELOPMENT_TEAM="${{ secrets.APPLE_TEAM_ID }}" \
             CODE_SIGN_STYLE=Manual \
             CODE_SIGN_IDENTITY="$CERT_IDENTITY" \
-            PROVISIONING_PROFILE_SPECIFIER=""
+            PROVISIONING_PROFILE_SPECIFIER="" \
+            ENABLE_HARDENED_RUNTIME=YES
 
       - name: Export signed app
         run: |
@@ -103,11 +104,24 @@ jobs:
             "$RUNNER_TEMP/export/TimeSquirrel.app" \
             "$RUNNER_TEMP/TimeSquirrel-notarize.zip"
 
-          xcrun notarytool submit "$RUNNER_TEMP/TimeSquirrel-notarize.zip" \
+          RESULT=$(xcrun notarytool submit "$RUNNER_TEMP/TimeSquirrel-notarize.zip" \
             --apple-id "${{ secrets.APPLE_ID }}" \
             --password "${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}" \
             --team-id "${{ secrets.APPLE_TEAM_ID }}" \
-            --wait
+            --wait --output-format json)
+
+          echo "$RESULT"
+          STATUS=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['status'])")
+
+          if [ "$STATUS" != "Accepted" ]; then
+            SUBMISSION_ID=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+            echo "Notarization failed with status: $STATUS — fetching log..."
+            xcrun notarytool log "$SUBMISSION_ID" \
+              --apple-id "${{ secrets.APPLE_ID }}" \
+              --password "${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}" \
+              --team-id "${{ secrets.APPLE_TEAM_ID }}"
+            exit 1
+          fi
 
       - name: Staple notarization ticket
         run: xcrun stapler staple "$RUNNER_TEMP/export/TimeSquirrel.app"

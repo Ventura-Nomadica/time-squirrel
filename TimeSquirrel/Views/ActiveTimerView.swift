@@ -21,14 +21,11 @@ struct ActiveTimerView: View {
 
             Divider()
 
-            VStack {
-                Spacer()
-                progressRing
-                Spacer().frame(height: 32)
-                controlRow
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            Spacer(minLength: 0)
+            progressRing
+            Spacer().frame(height: 32)
+            controlRow
+            Spacer(minLength: 0)
 
             if showNotes, let sc {
                 Divider()
@@ -36,7 +33,8 @@ struct ActiveTimerView: View {
                     get: { sc.session.notes },
                     set: { sc.updateNotes($0) }
                 ))
-                .frame(height: 200)
+                .frame(minHeight: 80, maxHeight: 200)
+                .layoutPriority(1)
             }
 
             Divider()
@@ -135,6 +133,16 @@ struct ActiveTimerView: View {
             .buttonStyle(.plain)
             .foregroundColor(.secondary)
             Spacer()
+            Button(action: { appController.openFloatingWindow() }) {
+                VStack(spacing: 3) {
+                    Image(systemName: "pip.fill")
+                        .font(.callout)
+                    Text("Always On Top")
+                        .font(.caption2)
+                }
+            }
+            .buttonStyle(.plain)
+            .foregroundColor(.secondary)
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 10)

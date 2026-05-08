@@ -26,6 +26,9 @@ final class AppController: ObservableObject {
     @Published var sessionController: SessionController?
     @Published private(set) var historyStore: HistoryStore
 
+    // MARK: - Floating window
+    var floatingWindowController: FloatingWindowController?
+
     // MARK: - Weak link to AppDelegate for menu bar
     weak var appDelegate: AppDelegate?
 
@@ -100,8 +103,24 @@ final class AppController: ObservableObject {
         appDelegate?.menuBarController?.rebuildMenu()
     }
 
+    func openFloatingWindow() {
+        if floatingWindowController == nil {
+            floatingWindowController = FloatingWindowController()
+        }
+        floatingWindowController?.open(appController: self)
+        NSApp.windows.first(where: { !($0 is NSPanel) })?.orderOut(nil)
+    }
+
+    func closeFloatingWindow() {
+        floatingWindowController?.close()
+        floatingWindowController = nil
+        NSApp.activate(ignoringOtherApps: true)
+        NSApp.windows.first(where: { !($0 is NSPanel) })?.makeKeyAndOrderFront(nil)
+    }
+
     func handleStop() {
         guard let sc = sessionController else { return }
+        closeFloatingWindow()
         let finalSession = sc.finalize()
         sessionController = nil
         sessionCancellable = nil
@@ -121,6 +140,7 @@ final class AppController: ObservableObject {
 
     func handleReset() {
         guard let sc = sessionController else { return }
+        closeFloatingWindow()
         sc.discard()
         sessionController = nil
         sessionCancellable = nil

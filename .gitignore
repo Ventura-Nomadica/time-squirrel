@@ -44,3 +44,9 @@ fastlane/test_output
 
 # Claude Code local settings
 .claude/settings.local.json
+.claude/settings.json
+
+# Design assets / working files
+trail/meta/files/*.png
+trail/meta/files/*.html
+trail/meta/files/fonts/

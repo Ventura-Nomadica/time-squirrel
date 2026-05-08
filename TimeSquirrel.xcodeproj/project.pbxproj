@@ -33,6 +33,8 @@
 		AA0011000000000000000018 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001000000000000000001B /* NotificationManager.swift */; };
 		AA0011000000000000000019 /* SaveLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001000000000000000001C /* SaveLocationManager.swift */; };
 		AA001100000000000000001A /* SparkleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001000000000000000001D /* SparkleController.swift */; };
+		AA001100000000000000001B /* FloatingWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001000000000000000001E /* FloatingWindowController.swift */; };
+		AA001100000000000000001C /* FloatingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001000000000000000001F /* FloatingSessionView.swift */; };
 		AA0012000000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0010000000000000000005 /* Assets.xcassets */; };
 		AA0013000000000000000003 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = AA0013000000000000000002 /* Sparkle */; };
 /* End PBXBuildFile section */
@@ -68,6 +70,8 @@
 		AA001000000000000000001B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		AA001000000000000000001C /* SaveLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLocationManager.swift; sourceTree = "<group>"; };
 		AA001000000000000000001D /* SparkleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkleController.swift; sourceTree = "<group>"; };
+		AA001000000000000000001E /* FloatingWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingWindowController.swift; sourceTree = "<group>"; };
+		AA001000000000000000001F /* FloatingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingSessionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 			children = (
 				AA001000000000000000000C /* AppController.swift */,
 				AA001000000000000000000D /* SessionController.swift */,
+				AA001000000000000000001E /* FloatingWindowController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 				AA0010000000000000000016 /* HistoryDetailView.swift */,
 				AA0010000000000000000017 /* SettingsView.swift */,
 				AA0010000000000000000019 /* AboutView.swift */,
+				AA001000000000000000001F /* FloatingSessionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -283,6 +289,8 @@
 				AA0011000000000000000018 /* NotificationManager.swift in Sources */,
 				AA0011000000000000000019 /* SaveLocationManager.swift in Sources */,
 				AA001100000000000000001A /* SparkleController.swift in Sources */,
+				AA001100000000000000001B /* FloatingWindowController.swift in Sources */,
+				AA001100000000000000001C /* FloatingSessionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

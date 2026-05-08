@@ -9,9 +9,10 @@ final class SparkleController {
     private init() {}
 
     func configure(updateBehavior: UpdateBehavior) {
+        guard isSparkleConfigured else { return }
+
         switch updateBehavior {
         case .manual:
-            // Manual mode: build the updater but do not start automatic checks.
             updaterController = SPUStandardUpdaterController(
                 startingUpdater: false,
                 updaterDelegate: nil,
@@ -25,6 +26,16 @@ final class SparkleController {
             )
             updaterController?.updater.updateCheckInterval = 86400
         }
+    }
+
+    private var isSparkleConfigured: Bool {
+        guard
+            let key = Bundle.main.object(forInfoDictionaryKey: "SUPublicEDKey") as? String,
+            let url = Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") as? String,
+            !key.hasPrefix("PLACEHOLDER"),
+            !url.isEmpty
+        else { return false }
+        return true
     }
 
     func checkForUpdates() {

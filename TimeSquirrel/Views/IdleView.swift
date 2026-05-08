@@ -8,19 +8,12 @@ struct IdleView: View {
             Spacer()
 
             // Identity
-            VStack(spacing: 12) {
-                Image(systemName: "clock.fill")
-                    .font(.system(size: 56))
-                    .foregroundColor(Color.tsAccent)
-                    .accessibilityHidden(true)
-
-                Text("Time Squirrel")
-                    .font(.largeTitle).bold()
-
-                Text("Collect your time. Keep it local.")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
+            Image("AppLogo")
+                .resizable()
+                .interpolation(.high)
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+                .accessibilityLabel("Time Squirrel")
 
             Spacer().frame(height: 48)
 

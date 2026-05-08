@@ -31,7 +31,7 @@
 	<key>NSSupportsSuddenTermination</key>
 	<false/>
 	<key>SUFeedURL</key>
-	<string>https://github.com/timesquirrel/timesquirrel/releases/latest/download/appcast.xml</string>
+	<string>https://github.com/Ventura-Nomadica/time-squirrel/releases/latest/download/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>PLACEHOLDER_REPLACE_WITH_REAL_EDKEY</string>
 	<key>NSUserNotificationAlertStyle</key>

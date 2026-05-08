@@ -35,7 +35,7 @@ struct AboutView: View {
             // Links
             VStack(spacing: 8) {
                 Link("Time Squirrel on GitHub",
-                     destination: URL(string: "https://github.com/timesquirrel/timesquirrel")!)
+                     destination: URL(string: "https://github.com/Ventura-Nomadica/time-squirrel")!)
                     .font(.callout)
 
                 Text("MIT License")

@@ -17,19 +17,17 @@ struct ActiveStopwatchView: View {
 
             Divider()
 
+            Spacer(minLength: 0)
+
             // Main content
             HStack(alignment: .top, spacing: 0) {
                 // Left: clock + controls
                 VStack(spacing: 0) {
-                    Spacer()
-
                     clockDisplay
 
                     Spacer().frame(height: 36)
 
                     controlRow
-
-                    Spacer()
                 }
                 .frame(maxWidth: .infinity)
 
@@ -41,6 +39,8 @@ struct ActiveStopwatchView: View {
                 }
             }
 
+            Spacer(minLength: 0)
+
             // Notes panel
             if showNotes, let sc {
                 Divider()
@@ -48,7 +48,8 @@ struct ActiveStopwatchView: View {
                     get: { sc.session.notes },
                     set: { sc.updateNotes($0) }
                 ))
-                .frame(height: 200)
+                .frame(minHeight: 80, maxHeight: 200)
+                .layoutPriority(1)
             }
 
             Divider()
@@ -144,6 +145,16 @@ struct ActiveStopwatchView: View {
             .buttonStyle(.plain)
             .foregroundColor(.secondary)
             Spacer()
+            Button(action: { appController.openFloatingWindow() }) {
+                VStack(spacing: 3) {
+                    Image(systemName: "pip.fill")
+                        .font(.callout)
+                    Text("Always On Top")
+                        .font(.caption2)
+                }
+            }
+            .buttonStyle(.plain)
+            .foregroundColor(.secondary)
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 10)

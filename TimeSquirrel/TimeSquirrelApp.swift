@@ -27,7 +27,8 @@ struct TimeSquirrelCommands: Commands {
     @ObservedObject var appController: AppController
 
     var body: some Commands {
-        CommandMenu("Time Squirrel") {
+        CommandGroup(after: .appInfo) {
+            Divider()
             Button("Settings") {
                 appController.showSettings = true
             }
@@ -41,12 +42,12 @@ struct TimeSquirrelCommands: Commands {
             .keyboardShortcut("h", modifiers: [.command, .shift])
         }
 
-        CommandMenu("Help") {
+        CommandGroup(replacing: .help) {
             Button("Keyboard Shortcuts") {
                 appController.showKeyboardShortcuts = true
             }
             Link("Time Squirrel on GitHub",
-                 destination: URL(string: "https://github.com/timesquirrel/timesquirrel")!)
+                 destination: URL(string: "https://github.com/Ventura-Nomadica/time-squirrel")!)
         }
     }
 }

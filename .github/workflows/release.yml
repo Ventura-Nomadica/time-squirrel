@@ -129,7 +129,7 @@ jobs:
       - name: Create DMG
         run: |
           mkdir -p "$RUNNER_TEMP/dmg_staging"
-          cp -r "$RUNNER_TEMP/export/TimeSquirrel.app" "$RUNNER_TEMP/dmg_staging/"
+          ditto "$RUNNER_TEMP/export/TimeSquirrel.app" "$RUNNER_TEMP/dmg_staging/TimeSquirrel.app"
           ln -s /Applications "$RUNNER_TEMP/dmg_staging/Applications"
 
           hdiutil create \

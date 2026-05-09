@@ -86,7 +86,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AA0005000000000000000001 /* root */ = {
+		AA0005000000000000000001 = {
 			isa = PBXGroup;
 			children = (
 				AA0005000000000000000003 /* TimeSquirrel */,
@@ -420,10 +420,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TimeSquirrel/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Time Squirrel";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.venturanomadica.timesquirrel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -443,10 +446,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TimeSquirrel/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Time Squirrel";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.venturanomadica.timesquirrel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -496,7 +502,6 @@
 			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */
-
 	};
 	rootObject = AA0001000000000000000001 /* Project object */;
 }

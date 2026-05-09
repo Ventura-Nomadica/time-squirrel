@@ -117,6 +117,10 @@ private struct SaveLocationStep: View {
             .padding(10)
             .background(Color.primary.opacity(0.04))
             .cornerRadius(8)
+
+            Text("Session data, including notes, is stored as unencrypted files in the location you choose.")
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
     }
 
@@ -129,6 +133,7 @@ private struct SaveLocationStep: View {
         panel.message = "Choose a folder for your session files."
         if panel.runModal() == .OK, let url = panel.url {
             path = url.path
+            try? SaveLocationManager.persistBookmark(for: url)
         }
     }
 }

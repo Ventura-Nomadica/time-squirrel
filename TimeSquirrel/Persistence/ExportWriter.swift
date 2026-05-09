@@ -8,8 +8,12 @@ enum ExportError: Error {
 final class ExportWriter {
 
     static func write(session: Session, to directory: URL) throws -> (markdown: URL, json: URL) {
+        let accessing = directory.startAccessingSecurityScopedResource()
+        defer { if accessing { directory.stopAccessingSecurityScopedResource() } }
         let fm = FileManager.default
         try fm.createDirectory(at: directory, withIntermediateDirectories: true)
+
+        SaveLocationManager.writeMarker(to: directory)
 
         let slug = sessionSlug(name: session.name, date: session.startDate)
         let mdURL = directory.appendingPathComponent("\(slug).md")
@@ -25,12 +29,23 @@ final class ExportWriter {
         guard let jsonData = try? encoder.encode(session) else { throw ExportError.encodingFailed }
         do { try jsonData.write(to: jsonURL, options: .atomic) } catch { throw ExportError.writeFailed(error) }
 
+        do {
+            try fm.setAttributes([.posixPermissions: 0o600], ofItemAtPath: mdURL.path)
+            try fm.setAttributes([.posixPermissions: 0o600], ofItemAtPath: jsonURL.path)
+        } catch {
+            throw ExportError.writeFailed(error)
+        }
+
         return (mdURL, jsonURL)
     }
 
     static func rewrite(session: Session, slug existingSlug: String, to directory: URL) throws -> (markdown: URL, json: URL) {
+        let accessing = directory.startAccessingSecurityScopedResource()
+        defer { if accessing { directory.stopAccessingSecurityScopedResource() } }
         let fm = FileManager.default
         try fm.createDirectory(at: directory, withIntermediateDirectories: true)
+
+        SaveLocationManager.writeMarker(to: directory)
 
         let mdURL = directory.appendingPathComponent("\(existingSlug).md")
         let jsonURL = directory.appendingPathComponent("\(existingSlug).json")
@@ -44,6 +59,13 @@ final class ExportWriter {
         encoder.dateEncodingStrategy = .iso8601
         guard let jsonData = try? encoder.encode(session) else { throw ExportError.encodingFailed }
         do { try jsonData.write(to: jsonURL, options: .atomic) } catch { throw ExportError.writeFailed(error) }
+
+        do {
+            try fm.setAttributes([.posixPermissions: 0o600], ofItemAtPath: mdURL.path)
+            try fm.setAttributes([.posixPermissions: 0o600], ofItemAtPath: jsonURL.path)
+        } catch {
+            throw ExportError.writeFailed(error)
+        }
 
         return (mdURL, jsonURL)
     }

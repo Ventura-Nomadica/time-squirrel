@@ -127,11 +127,15 @@ final class AppController: ObservableObject {
         appDelegate?.menuBarController?.stopAnimation()
         appDelegate?.menuBarController?.rebuildMenu()
 
-        let saveDir = URL(fileURLWithPath: settings.saveLocationPath, isDirectory: true)
+        let saveDir = (try? SaveLocationManager.resolveBookmark()) ?? URL(fileURLWithPath: settings.saveLocationPath, isDirectory: true)
         do {
             _ = try ExportWriter.write(session: finalSession, to: saveDir)
+            SessionRecoveryStore.shared.delete()
         } catch {
-            // Failure to export is non-fatal; session data is not lost here
+            NotificationManager.shared.post(
+                title: "Time Squirrel",
+                body: "Export failed: \(error.localizedDescription). Your session is preserved for recovery."
+            )
         }
 
         historyStore.reload()
@@ -158,8 +162,10 @@ final class AppController: ObservableObject {
         sessionController = nil
         sessionCancellable = nil
 
-        let saveDir = URL(fileURLWithPath: settings.saveLocationPath, isDirectory: true)
-        _ = try? ExportWriter.write(session: finalSession, to: saveDir)
+        let saveDir = (try? SaveLocationManager.resolveBookmark()) ?? URL(fileURLWithPath: settings.saveLocationPath, isDirectory: true)
+        if (try? ExportWriter.write(session: finalSession, to: saveDir)) != nil {
+            SessionRecoveryStore.shared.delete()
+        }
 
         NSApp.reply(toApplicationShouldTerminate: true)
     }

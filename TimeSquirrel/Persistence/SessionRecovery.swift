@@ -51,6 +51,11 @@ final class SessionRecoveryStore {
         encoder.dateEncodingStrategy = .iso8601
         guard let data = try? encoder.encode(state) else { return }
         try? data.write(to: fileURL, options: .atomic)
+        do {
+            try FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: fileURL.path)
+        } catch {
+            assertionFailure("Failed to set permissions on recovery file: \(error)")
+        }
     }
 
     func delete() {

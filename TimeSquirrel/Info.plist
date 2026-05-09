@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>1.1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>CFBundleIconFile</key>
 	<string>AppIcon</string>
 	<key>LSMinimumSystemVersion</key>
@@ -33,7 +33,7 @@
 	<key>SUFeedURL</key>
 	<string>https://github.com/Ventura-Nomadica/time-squirrel/releases/latest/download/appcast.xml</string>
 	<key>SUPublicEDKey</key>
-	<string>PLACEHOLDER_REPLACE_WITH_REAL_EDKEY</string>
+	<string>l70sDBV6M28lxc43/1v1zk5Chep59p4n1pV4TYGXuv0=</string>
 	<key>NSUserNotificationAlertStyle</key>
 	<string>alert</string>
 </dict>

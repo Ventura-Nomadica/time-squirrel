@@ -202,6 +202,13 @@ struct SettingsView: View {
         let newPath = newURL.path
         guard newPath != settings.saveLocationPath else { return }
 
+        do {
+            try SaveLocationManager.persistBookmark(for: newURL)
+        } catch {
+            migrationError = error.localizedDescription
+            return
+        }
+
         isMigrating = true
         migrationError = nil
         let oldPath = settings.saveLocationPath

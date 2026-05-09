@@ -172,7 +172,6 @@ final class SessionController: ObservableObject {
         session.endDate = now
         session.totalElapsed = elapsed
         session.totalPaused = accumulatedPaused
-        SessionRecoveryStore.shared.delete()
         return session
     }
 

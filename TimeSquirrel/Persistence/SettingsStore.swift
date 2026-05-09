@@ -14,6 +14,27 @@ final class SettingsStore {
         fileURL = dir.appendingPathComponent("settings.json")
     }
 
+    private var bookmarkFileURL: URL {
+        fileURL.deletingLastPathComponent().appendingPathComponent("save-folder-bookmark.dat")
+    }
+
+    func loadSaveFolderBookmark() -> Data? {
+        try? Data(contentsOf: bookmarkFileURL)
+    }
+
+    func saveSaveFolderBookmark(_ data: Data?) {
+        guard let data else {
+            try? FileManager.default.removeItem(at: bookmarkFileURL)
+            return
+        }
+        try? data.write(to: bookmarkFileURL, options: .atomic)
+        do {
+            try FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: bookmarkFileURL.path)
+        } catch {
+            assertionFailure("Failed to set permissions on bookmark file: \(error)")
+        }
+    }
+
     var exists: Bool {
         FileManager.default.fileExists(atPath: fileURL.path)
     }
@@ -31,5 +52,10 @@ final class SettingsStore {
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         guard let data = try? encoder.encode(settings) else { return }
         try? data.write(to: fileURL, options: .atomic)
+        do {
+            try FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: fileURL.path)
+        } catch {
+            assertionFailure("Failed to set permissions on settings file: \(error)")
+        }
     }
 }

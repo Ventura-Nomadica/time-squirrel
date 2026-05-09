@@ -1,0 +1,2 @@
+# Tell Linguist to ignore Trail working files when calculating repo language
+trail/meta/files/*.html linguist-documentation

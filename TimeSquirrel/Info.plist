@@ -25,7 +25,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2026 Time Squirrel. MIT License.</string>
+	<string>Copyright 2026 Ventura Nomadica. MIT License.</string>
 	<key>NSSupportsAutomaticTermination</key>
 	<false/>
 	<key>NSSupportsSuddenTermination</key>

@@ -10,7 +10,7 @@ A native macOS timer for stopwatch sessions, countdown timers, named laps, alert
 - **Stopwatch mode** — open-ended sessions with optional target duration, repeating interval alerts, and named laps
 - **Timer mode** — fixed countdowns with completion alerts and optional looping
 - **Local history** — every session saves automatically as a Markdown file and a JSON file in a folder you control
-- **Menu bar presence** — static squirrel icon when idle; animated running-wheel squirrel while a session is active
+- **Menu bar presence** — static squirrel icon when idle; animated clock-face squirrel while a session is active
 - **Note editor** — freeform Markdown note per session, with format bar and live preview
 - **First-class accessibility** — VoiceOver labels and reduced-motion behavior applied throughout
 
@@ -67,16 +67,6 @@ File naming: `YYYY-MM-DD-entry-name.md` and `.json`. One file pair per session.
 Your files are yours. Whether that folder syncs to iCloud or Dropbox is your macOS configuration, not this app's.
 
 > **Privacy note:** Session data, including notes, is stored as unencrypted files in the location you choose.
-
----
-
-## Pre-release status
-
-The current build is functional but not distribution-ready. Known gaps before a public release:
-
-- **App icon** — slots are wired in `AppIcon.appiconset` but no PNG artwork is present. The app ships with no icon until correctly-sized rasterized exports are dropped in.
-- **Sparkle appcast** — `SUFeedURL` in `Info.plist` points to a placeholder. Automatic updates will not work until a real `appcast.xml` and matching EdDSA key pair are published at that URL.
-- **Code signing** — `DEVELOPMENT_TEAM` is blank. Release builds and notarization require a valid Apple Developer team ID.
 
 ---
 
